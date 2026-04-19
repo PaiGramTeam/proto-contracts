@@ -510,6 +510,310 @@ func (x *GetCredentialSummaryResponse) GetProfiles() []*ProfileSummary {
 	return nil
 }
 
+type PutCredentialRequest struct {
+	state                 protoimpl.MessageState `protogen:"open.v1"`
+	ServiceTicket         string                 `protobuf:"bytes,1,opt,name=service_ticket,json=serviceTicket,proto3" json:"service_ticket,omitempty"`
+	PlatformAccountId     string                 `protobuf:"bytes,2,opt,name=platform_account_id,json=platformAccountId,proto3" json:"platform_account_id,omitempty"`
+	CredentialPayloadJson string                 `protobuf:"bytes,3,opt,name=credential_payload_json,json=credentialPayloadJson,proto3" json:"credential_payload_json,omitempty"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
+}
+
+func (x *PutCredentialRequest) Reset() {
+	*x = PutCredentialRequest{}
+	mi := &file_platform_v1_platform_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *PutCredentialRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PutCredentialRequest) ProtoMessage() {}
+
+func (x *PutCredentialRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_platform_v1_platform_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use PutCredentialRequest.ProtoReflect.Descriptor instead.
+func (*PutCredentialRequest) Descriptor() ([]byte, []int) {
+	return file_platform_v1_platform_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *PutCredentialRequest) GetServiceTicket() string {
+	if x != nil {
+		return x.ServiceTicket
+	}
+	return ""
+}
+
+func (x *PutCredentialRequest) GetPlatformAccountId() string {
+	if x != nil {
+		return x.PlatformAccountId
+	}
+	return ""
+}
+
+func (x *PutCredentialRequest) GetCredentialPayloadJson() string {
+	if x != nil {
+		return x.CredentialPayloadJson
+	}
+	return ""
+}
+
+type PutCredentialResponse struct {
+	state         protoimpl.MessageState        `protogen:"open.v1"`
+	Summary       *GetCredentialSummaryResponse `protobuf:"bytes,1,opt,name=summary,proto3" json:"summary,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *PutCredentialResponse) Reset() {
+	*x = PutCredentialResponse{}
+	mi := &file_platform_v1_platform_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *PutCredentialResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PutCredentialResponse) ProtoMessage() {}
+
+func (x *PutCredentialResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_platform_v1_platform_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use PutCredentialResponse.ProtoReflect.Descriptor instead.
+func (*PutCredentialResponse) Descriptor() ([]byte, []int) {
+	return file_platform_v1_platform_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *PutCredentialResponse) GetSummary() *GetCredentialSummaryResponse {
+	if x != nil {
+		return x.Summary
+	}
+	return nil
+}
+
+type RefreshCredentialRequest struct {
+	state             protoimpl.MessageState `protogen:"open.v1"`
+	ServiceTicket     string                 `protobuf:"bytes,1,opt,name=service_ticket,json=serviceTicket,proto3" json:"service_ticket,omitempty"`
+	PlatformAccountId string                 `protobuf:"bytes,2,opt,name=platform_account_id,json=platformAccountId,proto3" json:"platform_account_id,omitempty"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
+}
+
+func (x *RefreshCredentialRequest) Reset() {
+	*x = RefreshCredentialRequest{}
+	mi := &file_platform_v1_platform_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RefreshCredentialRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RefreshCredentialRequest) ProtoMessage() {}
+
+func (x *RefreshCredentialRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_platform_v1_platform_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RefreshCredentialRequest.ProtoReflect.Descriptor instead.
+func (*RefreshCredentialRequest) Descriptor() ([]byte, []int) {
+	return file_platform_v1_platform_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *RefreshCredentialRequest) GetServiceTicket() string {
+	if x != nil {
+		return x.ServiceTicket
+	}
+	return ""
+}
+
+func (x *RefreshCredentialRequest) GetPlatformAccountId() string {
+	if x != nil {
+		return x.PlatformAccountId
+	}
+	return ""
+}
+
+type RefreshCredentialResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Status        CredentialStatus       `protobuf:"varint,1,opt,name=status,proto3,enum=paigram.platform.v1.CredentialStatus" json:"status,omitempty"`
+	RefreshedAt   *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=refreshed_at,json=refreshedAt,proto3" json:"refreshed_at,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *RefreshCredentialResponse) Reset() {
+	*x = RefreshCredentialResponse{}
+	mi := &file_platform_v1_platform_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RefreshCredentialResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RefreshCredentialResponse) ProtoMessage() {}
+
+func (x *RefreshCredentialResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_platform_v1_platform_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RefreshCredentialResponse.ProtoReflect.Descriptor instead.
+func (*RefreshCredentialResponse) Descriptor() ([]byte, []int) {
+	return file_platform_v1_platform_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *RefreshCredentialResponse) GetStatus() CredentialStatus {
+	if x != nil {
+		return x.Status
+	}
+	return CredentialStatus_CREDENTIAL_STATUS_UNSPECIFIED
+}
+
+func (x *RefreshCredentialResponse) GetRefreshedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.RefreshedAt
+	}
+	return nil
+}
+
+type DeleteCredentialRequest struct {
+	state             protoimpl.MessageState `protogen:"open.v1"`
+	ServiceTicket     string                 `protobuf:"bytes,1,opt,name=service_ticket,json=serviceTicket,proto3" json:"service_ticket,omitempty"`
+	PlatformAccountId string                 `protobuf:"bytes,2,opt,name=platform_account_id,json=platformAccountId,proto3" json:"platform_account_id,omitempty"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
+}
+
+func (x *DeleteCredentialRequest) Reset() {
+	*x = DeleteCredentialRequest{}
+	mi := &file_platform_v1_platform_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DeleteCredentialRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteCredentialRequest) ProtoMessage() {}
+
+func (x *DeleteCredentialRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_platform_v1_platform_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteCredentialRequest.ProtoReflect.Descriptor instead.
+func (*DeleteCredentialRequest) Descriptor() ([]byte, []int) {
+	return file_platform_v1_platform_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *DeleteCredentialRequest) GetServiceTicket() string {
+	if x != nil {
+		return x.ServiceTicket
+	}
+	return ""
+}
+
+func (x *DeleteCredentialRequest) GetPlatformAccountId() string {
+	if x != nil {
+		return x.PlatformAccountId
+	}
+	return ""
+}
+
+type DeleteCredentialResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Success       bool                   `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DeleteCredentialResponse) Reset() {
+	*x = DeleteCredentialResponse{}
+	mi := &file_platform_v1_platform_proto_msgTypes[11]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DeleteCredentialResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteCredentialResponse) ProtoMessage() {}
+
+func (x *DeleteCredentialResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_platform_v1_platform_proto_msgTypes[11]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteCredentialResponse.ProtoReflect.Descriptor instead.
+func (*DeleteCredentialResponse) Descriptor() ([]byte, []int) {
+	return file_platform_v1_platform_proto_rawDescGZIP(), []int{11}
+}
+
+func (x *DeleteCredentialResponse) GetSuccess() bool {
+	if x != nil {
+		return x.Success
+	}
+	return false
+}
+
 var File_platform_v1_platform_proto protoreflect.FileDescriptor
 
 const file_platform_v1_platform_proto_rawDesc = "" +
@@ -550,16 +854,36 @@ const file_platform_v1_platform_proto_rawDesc = "" +
 	"\x11last_validated_at\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\x0flastValidatedAt\x12F\n" +
 	"\x11last_refreshed_at\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\x0flastRefreshedAt\x12<\n" +
 	"\adevices\x18\x05 \x03(\v2\".paigram.platform.v1.DeviceSummaryR\adevices\x12?\n" +
-	"\bprofiles\x18\x06 \x03(\v2#.paigram.platform.v1.ProfileSummaryR\bprofiles*\xbb\x01\n" +
+	"\bprofiles\x18\x06 \x03(\v2#.paigram.platform.v1.ProfileSummaryR\bprofiles\"\xa5\x01\n" +
+	"\x14PutCredentialRequest\x12%\n" +
+	"\x0eservice_ticket\x18\x01 \x01(\tR\rserviceTicket\x12.\n" +
+	"\x13platform_account_id\x18\x02 \x01(\tR\x11platformAccountId\x126\n" +
+	"\x17credential_payload_json\x18\x03 \x01(\tR\x15credentialPayloadJson\"d\n" +
+	"\x15PutCredentialResponse\x12K\n" +
+	"\asummary\x18\x01 \x01(\v21.paigram.platform.v1.GetCredentialSummaryResponseR\asummary\"q\n" +
+	"\x18RefreshCredentialRequest\x12%\n" +
+	"\x0eservice_ticket\x18\x01 \x01(\tR\rserviceTicket\x12.\n" +
+	"\x13platform_account_id\x18\x02 \x01(\tR\x11platformAccountId\"\x99\x01\n" +
+	"\x19RefreshCredentialResponse\x12=\n" +
+	"\x06status\x18\x01 \x01(\x0e2%.paigram.platform.v1.CredentialStatusR\x06status\x12=\n" +
+	"\frefreshed_at\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\vrefreshedAt\"p\n" +
+	"\x17DeleteCredentialRequest\x12%\n" +
+	"\x0eservice_ticket\x18\x01 \x01(\tR\rserviceTicket\x12.\n" +
+	"\x13platform_account_id\x18\x02 \x01(\tR\x11platformAccountId\"4\n" +
+	"\x18DeleteCredentialResponse\x12\x18\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess*\xbb\x01\n" +
 	"\x10CredentialStatus\x12!\n" +
 	"\x1dCREDENTIAL_STATUS_UNSPECIFIED\x10\x00\x12\x1c\n" +
 	"\x18CREDENTIAL_STATUS_ACTIVE\x10\x01\x12\x1d\n" +
 	"\x19CREDENTIAL_STATUS_EXPIRED\x10\x02\x12\x1d\n" +
 	"\x19CREDENTIAL_STATUS_INVALID\x10\x03\x12(\n" +
-	"$CREDENTIAL_STATUS_CHALLENGE_REQUIRED\x10\x042\xff\x01\n" +
+	"$CREDENTIAL_STATUS_CHALLENGE_REQUIRED\x10\x042\xcc\x04\n" +
 	"\x0fPlatformService\x12o\n" +
 	"\x10DescribePlatform\x12,.paigram.platform.v1.DescribePlatformRequest\x1a-.paigram.platform.v1.DescribePlatformResponse\x12{\n" +
-	"\x14GetCredentialSummary\x120.paigram.platform.v1.GetCredentialSummaryRequest\x1a1.paigram.platform.v1.GetCredentialSummaryResponseB?Z=github.com/PaiGramTeam/proto-contracts/platform/v1;platformv1b\x06proto3"
+	"\x14GetCredentialSummary\x120.paigram.platform.v1.GetCredentialSummaryRequest\x1a1.paigram.platform.v1.GetCredentialSummaryResponse\x12f\n" +
+	"\rPutCredential\x12).paigram.platform.v1.PutCredentialRequest\x1a*.paigram.platform.v1.PutCredentialResponse\x12r\n" +
+	"\x11RefreshCredential\x12-.paigram.platform.v1.RefreshCredentialRequest\x1a..paigram.platform.v1.RefreshCredentialResponse\x12o\n" +
+	"\x10DeleteCredential\x12,.paigram.platform.v1.DeleteCredentialRequest\x1a-.paigram.platform.v1.DeleteCredentialResponseB?Z=github.com/PaiGramTeam/proto-contracts/platform/v1;platformv1b\x06proto3"
 
 var (
 	file_platform_v1_platform_proto_rawDescOnce sync.Once
@@ -574,7 +898,7 @@ func file_platform_v1_platform_proto_rawDescGZIP() []byte {
 }
 
 var file_platform_v1_platform_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_platform_v1_platform_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
+var file_platform_v1_platform_proto_msgTypes = make([]protoimpl.MessageInfo, 12)
 var file_platform_v1_platform_proto_goTypes = []any{
 	(CredentialStatus)(0),                // 0: paigram.platform.v1.CredentialStatus
 	(*DescribePlatformRequest)(nil),      // 1: paigram.platform.v1.DescribePlatformRequest
@@ -583,26 +907,41 @@ var file_platform_v1_platform_proto_goTypes = []any{
 	(*ProfileSummary)(nil),               // 4: paigram.platform.v1.ProfileSummary
 	(*GetCredentialSummaryRequest)(nil),  // 5: paigram.platform.v1.GetCredentialSummaryRequest
 	(*GetCredentialSummaryResponse)(nil), // 6: paigram.platform.v1.GetCredentialSummaryResponse
-	(*structpb.Struct)(nil),              // 7: google.protobuf.Struct
-	(*timestamppb.Timestamp)(nil),        // 8: google.protobuf.Timestamp
+	(*PutCredentialRequest)(nil),         // 7: paigram.platform.v1.PutCredentialRequest
+	(*PutCredentialResponse)(nil),        // 8: paigram.platform.v1.PutCredentialResponse
+	(*RefreshCredentialRequest)(nil),     // 9: paigram.platform.v1.RefreshCredentialRequest
+	(*RefreshCredentialResponse)(nil),    // 10: paigram.platform.v1.RefreshCredentialResponse
+	(*DeleteCredentialRequest)(nil),      // 11: paigram.platform.v1.DeleteCredentialRequest
+	(*DeleteCredentialResponse)(nil),     // 12: paigram.platform.v1.DeleteCredentialResponse
+	(*structpb.Struct)(nil),              // 13: google.protobuf.Struct
+	(*timestamppb.Timestamp)(nil),        // 14: google.protobuf.Timestamp
 }
 var file_platform_v1_platform_proto_depIdxs = []int32{
-	7, // 0: paigram.platform.v1.DescribePlatformResponse.credential_schema:type_name -> google.protobuf.Struct
-	8, // 1: paigram.platform.v1.DeviceSummary.last_seen_at:type_name -> google.protobuf.Timestamp
-	0, // 2: paigram.platform.v1.GetCredentialSummaryResponse.status:type_name -> paigram.platform.v1.CredentialStatus
-	8, // 3: paigram.platform.v1.GetCredentialSummaryResponse.last_validated_at:type_name -> google.protobuf.Timestamp
-	8, // 4: paigram.platform.v1.GetCredentialSummaryResponse.last_refreshed_at:type_name -> google.protobuf.Timestamp
-	3, // 5: paigram.platform.v1.GetCredentialSummaryResponse.devices:type_name -> paigram.platform.v1.DeviceSummary
-	4, // 6: paigram.platform.v1.GetCredentialSummaryResponse.profiles:type_name -> paigram.platform.v1.ProfileSummary
-	1, // 7: paigram.platform.v1.PlatformService.DescribePlatform:input_type -> paigram.platform.v1.DescribePlatformRequest
-	5, // 8: paigram.platform.v1.PlatformService.GetCredentialSummary:input_type -> paigram.platform.v1.GetCredentialSummaryRequest
-	2, // 9: paigram.platform.v1.PlatformService.DescribePlatform:output_type -> paigram.platform.v1.DescribePlatformResponse
-	6, // 10: paigram.platform.v1.PlatformService.GetCredentialSummary:output_type -> paigram.platform.v1.GetCredentialSummaryResponse
-	9, // [9:11] is the sub-list for method output_type
-	7, // [7:9] is the sub-list for method input_type
-	7, // [7:7] is the sub-list for extension type_name
-	7, // [7:7] is the sub-list for extension extendee
-	0, // [0:7] is the sub-list for field type_name
+	13, // 0: paigram.platform.v1.DescribePlatformResponse.credential_schema:type_name -> google.protobuf.Struct
+	14, // 1: paigram.platform.v1.DeviceSummary.last_seen_at:type_name -> google.protobuf.Timestamp
+	0,  // 2: paigram.platform.v1.GetCredentialSummaryResponse.status:type_name -> paigram.platform.v1.CredentialStatus
+	14, // 3: paigram.platform.v1.GetCredentialSummaryResponse.last_validated_at:type_name -> google.protobuf.Timestamp
+	14, // 4: paigram.platform.v1.GetCredentialSummaryResponse.last_refreshed_at:type_name -> google.protobuf.Timestamp
+	3,  // 5: paigram.platform.v1.GetCredentialSummaryResponse.devices:type_name -> paigram.platform.v1.DeviceSummary
+	4,  // 6: paigram.platform.v1.GetCredentialSummaryResponse.profiles:type_name -> paigram.platform.v1.ProfileSummary
+	6,  // 7: paigram.platform.v1.PutCredentialResponse.summary:type_name -> paigram.platform.v1.GetCredentialSummaryResponse
+	0,  // 8: paigram.platform.v1.RefreshCredentialResponse.status:type_name -> paigram.platform.v1.CredentialStatus
+	14, // 9: paigram.platform.v1.RefreshCredentialResponse.refreshed_at:type_name -> google.protobuf.Timestamp
+	1,  // 10: paigram.platform.v1.PlatformService.DescribePlatform:input_type -> paigram.platform.v1.DescribePlatformRequest
+	5,  // 11: paigram.platform.v1.PlatformService.GetCredentialSummary:input_type -> paigram.platform.v1.GetCredentialSummaryRequest
+	7,  // 12: paigram.platform.v1.PlatformService.PutCredential:input_type -> paigram.platform.v1.PutCredentialRequest
+	9,  // 13: paigram.platform.v1.PlatformService.RefreshCredential:input_type -> paigram.platform.v1.RefreshCredentialRequest
+	11, // 14: paigram.platform.v1.PlatformService.DeleteCredential:input_type -> paigram.platform.v1.DeleteCredentialRequest
+	2,  // 15: paigram.platform.v1.PlatformService.DescribePlatform:output_type -> paigram.platform.v1.DescribePlatformResponse
+	6,  // 16: paigram.platform.v1.PlatformService.GetCredentialSummary:output_type -> paigram.platform.v1.GetCredentialSummaryResponse
+	8,  // 17: paigram.platform.v1.PlatformService.PutCredential:output_type -> paigram.platform.v1.PutCredentialResponse
+	10, // 18: paigram.platform.v1.PlatformService.RefreshCredential:output_type -> paigram.platform.v1.RefreshCredentialResponse
+	12, // 19: paigram.platform.v1.PlatformService.DeleteCredential:output_type -> paigram.platform.v1.DeleteCredentialResponse
+	15, // [15:20] is the sub-list for method output_type
+	10, // [10:15] is the sub-list for method input_type
+	10, // [10:10] is the sub-list for extension type_name
+	10, // [10:10] is the sub-list for extension extendee
+	0,  // [0:10] is the sub-list for field type_name
 }
 
 func init() { file_platform_v1_platform_proto_init() }
@@ -616,7 +955,7 @@ func file_platform_v1_platform_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_platform_v1_platform_proto_rawDesc), len(file_platform_v1_platform_proto_rawDesc)),
 			NumEnums:      1,
-			NumMessages:   6,
+			NumMessages:   12,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
