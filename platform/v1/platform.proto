@@ -10,6 +10,9 @@ import "google/protobuf/timestamp.proto";
 service PlatformService {
   rpc DescribePlatform(DescribePlatformRequest) returns (DescribePlatformResponse);
   rpc GetCredentialSummary(GetCredentialSummaryRequest) returns (GetCredentialSummaryResponse);
+  rpc PutCredential(PutCredentialRequest) returns (PutCredentialResponse);
+  rpc RefreshCredential(RefreshCredentialRequest) returns (RefreshCredentialResponse);
+  rpc DeleteCredential(DeleteCredentialRequest) returns (DeleteCredentialResponse);
 }
 
 message DescribePlatformRequest {}
@@ -62,4 +65,33 @@ message GetCredentialSummaryResponse {
   google.protobuf.Timestamp last_refreshed_at = 4;
   repeated DeviceSummary devices = 5;
   repeated ProfileSummary profiles = 6;
+}
+
+message PutCredentialRequest {
+  string service_ticket = 1;
+  string platform_account_id = 2;
+  string credential_payload_json = 3;
+}
+
+message PutCredentialResponse {
+  GetCredentialSummaryResponse summary = 1;
+}
+
+message RefreshCredentialRequest {
+  string service_ticket = 1;
+  string platform_account_id = 2;
+}
+
+message RefreshCredentialResponse {
+  CredentialStatus status = 1;
+  google.protobuf.Timestamp refreshed_at = 2;
+}
+
+message DeleteCredentialRequest {
+  string service_ticket = 1;
+  string platform_account_id = 2;
+}
+
+message DeleteCredentialResponse {
+  bool success = 1;
 }
