@@ -19,11 +19,12 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	PlatformService_DescribePlatform_FullMethodName     = "/paigram.platform.v1.PlatformService/DescribePlatform"
-	PlatformService_GetCredentialSummary_FullMethodName = "/paigram.platform.v1.PlatformService/GetCredentialSummary"
-	PlatformService_PutCredential_FullMethodName        = "/paigram.platform.v1.PlatformService/PutCredential"
-	PlatformService_RefreshCredential_FullMethodName    = "/paigram.platform.v1.PlatformService/RefreshCredential"
-	PlatformService_DeleteCredential_FullMethodName     = "/paigram.platform.v1.PlatformService/DeleteCredential"
+	PlatformService_DescribePlatform_FullMethodName        = "/paigram.platform.v1.PlatformService/DescribePlatform"
+	PlatformService_GetCredentialSummary_FullMethodName    = "/paigram.platform.v1.PlatformService/GetCredentialSummary"
+	PlatformService_PutCredential_FullMethodName           = "/paigram.platform.v1.PlatformService/PutCredential"
+	PlatformService_RefreshCredential_FullMethodName       = "/paigram.platform.v1.PlatformService/RefreshCredential"
+	PlatformService_DeleteCredential_FullMethodName        = "/paigram.platform.v1.PlatformService/DeleteCredential"
+	PlatformService_InvalidateConsumerGrant_FullMethodName = "/paigram.platform.v1.PlatformService/InvalidateConsumerGrant"
 )
 
 // PlatformServiceClient is the client API for PlatformService service.
@@ -35,6 +36,7 @@ type PlatformServiceClient interface {
 	PutCredential(ctx context.Context, in *PutCredentialRequest, opts ...grpc.CallOption) (*PutCredentialResponse, error)
 	RefreshCredential(ctx context.Context, in *RefreshCredentialRequest, opts ...grpc.CallOption) (*RefreshCredentialResponse, error)
 	DeleteCredential(ctx context.Context, in *DeleteCredentialRequest, opts ...grpc.CallOption) (*DeleteCredentialResponse, error)
+	InvalidateConsumerGrant(ctx context.Context, in *InvalidateConsumerGrantRequest, opts ...grpc.CallOption) (*InvalidateConsumerGrantResponse, error)
 }
 
 type platformServiceClient struct {
@@ -95,6 +97,16 @@ func (c *platformServiceClient) DeleteCredential(ctx context.Context, in *Delete
 	return out, nil
 }
 
+func (c *platformServiceClient) InvalidateConsumerGrant(ctx context.Context, in *InvalidateConsumerGrantRequest, opts ...grpc.CallOption) (*InvalidateConsumerGrantResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(InvalidateConsumerGrantResponse)
+	err := c.cc.Invoke(ctx, PlatformService_InvalidateConsumerGrant_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // PlatformServiceServer is the server API for PlatformService service.
 // All implementations must embed UnimplementedPlatformServiceServer
 // for forward compatibility.
@@ -104,6 +116,7 @@ type PlatformServiceServer interface {
 	PutCredential(context.Context, *PutCredentialRequest) (*PutCredentialResponse, error)
 	RefreshCredential(context.Context, *RefreshCredentialRequest) (*RefreshCredentialResponse, error)
 	DeleteCredential(context.Context, *DeleteCredentialRequest) (*DeleteCredentialResponse, error)
+	InvalidateConsumerGrant(context.Context, *InvalidateConsumerGrantRequest) (*InvalidateConsumerGrantResponse, error)
 	mustEmbedUnimplementedPlatformServiceServer()
 }
 
@@ -128,6 +141,9 @@ func (UnimplementedPlatformServiceServer) RefreshCredential(context.Context, *Re
 }
 func (UnimplementedPlatformServiceServer) DeleteCredential(context.Context, *DeleteCredentialRequest) (*DeleteCredentialResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method DeleteCredential not implemented")
+}
+func (UnimplementedPlatformServiceServer) InvalidateConsumerGrant(context.Context, *InvalidateConsumerGrantRequest) (*InvalidateConsumerGrantResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method InvalidateConsumerGrant not implemented")
 }
 func (UnimplementedPlatformServiceServer) mustEmbedUnimplementedPlatformServiceServer() {}
 func (UnimplementedPlatformServiceServer) testEmbeddedByValue()                         {}
@@ -240,6 +256,24 @@ func _PlatformService_DeleteCredential_Handler(srv interface{}, ctx context.Cont
 	return interceptor(ctx, in, info, handler)
 }
 
+func _PlatformService_InvalidateConsumerGrant_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(InvalidateConsumerGrantRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PlatformServiceServer).InvalidateConsumerGrant(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PlatformService_InvalidateConsumerGrant_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PlatformServiceServer).InvalidateConsumerGrant(ctx, req.(*InvalidateConsumerGrantRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // PlatformService_ServiceDesc is the grpc.ServiceDesc for PlatformService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -266,6 +300,10 @@ var PlatformService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeleteCredential",
 			Handler:    _PlatformService_DeleteCredential_Handler,
+		},
+		{
+			MethodName: "InvalidateConsumerGrant",
+			Handler:    _PlatformService_InvalidateConsumerGrant_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

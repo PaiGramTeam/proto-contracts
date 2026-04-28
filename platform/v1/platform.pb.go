@@ -814,6 +814,118 @@ func (x *DeleteCredentialResponse) GetSuccess() bool {
 	return false
 }
 
+type InvalidateConsumerGrantRequest struct {
+	state               protoimpl.MessageState `protogen:"open.v1"`
+	ServiceTicket       string                 `protobuf:"bytes,1,opt,name=service_ticket,json=serviceTicket,proto3" json:"service_ticket,omitempty"`
+	BindingId           uint64                 `protobuf:"varint,2,opt,name=binding_id,json=bindingId,proto3" json:"binding_id,omitempty"`
+	Consumer            string                 `protobuf:"bytes,3,opt,name=consumer,proto3" json:"consumer,omitempty"`
+	MinimumGrantVersion uint64                 `protobuf:"varint,4,opt,name=minimum_grant_version,json=minimumGrantVersion,proto3" json:"minimum_grant_version,omitempty"`
+	unknownFields       protoimpl.UnknownFields
+	sizeCache           protoimpl.SizeCache
+}
+
+func (x *InvalidateConsumerGrantRequest) Reset() {
+	*x = InvalidateConsumerGrantRequest{}
+	mi := &file_platform_v1_platform_proto_msgTypes[12]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *InvalidateConsumerGrantRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*InvalidateConsumerGrantRequest) ProtoMessage() {}
+
+func (x *InvalidateConsumerGrantRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_platform_v1_platform_proto_msgTypes[12]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use InvalidateConsumerGrantRequest.ProtoReflect.Descriptor instead.
+func (*InvalidateConsumerGrantRequest) Descriptor() ([]byte, []int) {
+	return file_platform_v1_platform_proto_rawDescGZIP(), []int{12}
+}
+
+func (x *InvalidateConsumerGrantRequest) GetServiceTicket() string {
+	if x != nil {
+		return x.ServiceTicket
+	}
+	return ""
+}
+
+func (x *InvalidateConsumerGrantRequest) GetBindingId() uint64 {
+	if x != nil {
+		return x.BindingId
+	}
+	return 0
+}
+
+func (x *InvalidateConsumerGrantRequest) GetConsumer() string {
+	if x != nil {
+		return x.Consumer
+	}
+	return ""
+}
+
+func (x *InvalidateConsumerGrantRequest) GetMinimumGrantVersion() uint64 {
+	if x != nil {
+		return x.MinimumGrantVersion
+	}
+	return 0
+}
+
+type InvalidateConsumerGrantResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Success       bool                   `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *InvalidateConsumerGrantResponse) Reset() {
+	*x = InvalidateConsumerGrantResponse{}
+	mi := &file_platform_v1_platform_proto_msgTypes[13]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *InvalidateConsumerGrantResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*InvalidateConsumerGrantResponse) ProtoMessage() {}
+
+func (x *InvalidateConsumerGrantResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_platform_v1_platform_proto_msgTypes[13]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use InvalidateConsumerGrantResponse.ProtoReflect.Descriptor instead.
+func (*InvalidateConsumerGrantResponse) Descriptor() ([]byte, []int) {
+	return file_platform_v1_platform_proto_rawDescGZIP(), []int{13}
+}
+
+func (x *InvalidateConsumerGrantResponse) GetSuccess() bool {
+	if x != nil {
+		return x.Success
+	}
+	return false
+}
+
 var File_platform_v1_platform_proto protoreflect.FileDescriptor
 
 const file_platform_v1_platform_proto_rawDesc = "" +
@@ -871,19 +983,28 @@ const file_platform_v1_platform_proto_rawDesc = "" +
 	"\x0eservice_ticket\x18\x01 \x01(\tR\rserviceTicket\x12.\n" +
 	"\x13platform_account_id\x18\x02 \x01(\tR\x11platformAccountId\"4\n" +
 	"\x18DeleteCredentialResponse\x12\x18\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess\"\xb6\x01\n" +
+	"\x1eInvalidateConsumerGrantRequest\x12%\n" +
+	"\x0eservice_ticket\x18\x01 \x01(\tR\rserviceTicket\x12\x1d\n" +
+	"\n" +
+	"binding_id\x18\x02 \x01(\x04R\tbindingId\x12\x1a\n" +
+	"\bconsumer\x18\x03 \x01(\tR\bconsumer\x122\n" +
+	"\x15minimum_grant_version\x18\x04 \x01(\x04R\x13minimumGrantVersion\";\n" +
+	"\x1fInvalidateConsumerGrantResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess*\xbb\x01\n" +
 	"\x10CredentialStatus\x12!\n" +
 	"\x1dCREDENTIAL_STATUS_UNSPECIFIED\x10\x00\x12\x1c\n" +
 	"\x18CREDENTIAL_STATUS_ACTIVE\x10\x01\x12\x1d\n" +
 	"\x19CREDENTIAL_STATUS_EXPIRED\x10\x02\x12\x1d\n" +
 	"\x19CREDENTIAL_STATUS_INVALID\x10\x03\x12(\n" +
-	"$CREDENTIAL_STATUS_CHALLENGE_REQUIRED\x10\x042\xcc\x04\n" +
+	"$CREDENTIAL_STATUS_CHALLENGE_REQUIRED\x10\x042\xd3\x05\n" +
 	"\x0fPlatformService\x12o\n" +
 	"\x10DescribePlatform\x12,.paigram.platform.v1.DescribePlatformRequest\x1a-.paigram.platform.v1.DescribePlatformResponse\x12{\n" +
 	"\x14GetCredentialSummary\x120.paigram.platform.v1.GetCredentialSummaryRequest\x1a1.paigram.platform.v1.GetCredentialSummaryResponse\x12f\n" +
 	"\rPutCredential\x12).paigram.platform.v1.PutCredentialRequest\x1a*.paigram.platform.v1.PutCredentialResponse\x12r\n" +
 	"\x11RefreshCredential\x12-.paigram.platform.v1.RefreshCredentialRequest\x1a..paigram.platform.v1.RefreshCredentialResponse\x12o\n" +
-	"\x10DeleteCredential\x12,.paigram.platform.v1.DeleteCredentialRequest\x1a-.paigram.platform.v1.DeleteCredentialResponseB?Z=github.com/PaiGramTeam/proto-contracts/platform/v1;platformv1b\x06proto3"
+	"\x10DeleteCredential\x12,.paigram.platform.v1.DeleteCredentialRequest\x1a-.paigram.platform.v1.DeleteCredentialResponse\x12\x84\x01\n" +
+	"\x17InvalidateConsumerGrant\x123.paigram.platform.v1.InvalidateConsumerGrantRequest\x1a4.paigram.platform.v1.InvalidateConsumerGrantResponseB?Z=github.com/PaiGramTeam/proto-contracts/platform/v1;platformv1b\x06proto3"
 
 var (
 	file_platform_v1_platform_proto_rawDescOnce sync.Once
@@ -898,47 +1019,51 @@ func file_platform_v1_platform_proto_rawDescGZIP() []byte {
 }
 
 var file_platform_v1_platform_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_platform_v1_platform_proto_msgTypes = make([]protoimpl.MessageInfo, 12)
+var file_platform_v1_platform_proto_msgTypes = make([]protoimpl.MessageInfo, 14)
 var file_platform_v1_platform_proto_goTypes = []any{
-	(CredentialStatus)(0),                // 0: paigram.platform.v1.CredentialStatus
-	(*DescribePlatformRequest)(nil),      // 1: paigram.platform.v1.DescribePlatformRequest
-	(*DescribePlatformResponse)(nil),     // 2: paigram.platform.v1.DescribePlatformResponse
-	(*DeviceSummary)(nil),                // 3: paigram.platform.v1.DeviceSummary
-	(*ProfileSummary)(nil),               // 4: paigram.platform.v1.ProfileSummary
-	(*GetCredentialSummaryRequest)(nil),  // 5: paigram.platform.v1.GetCredentialSummaryRequest
-	(*GetCredentialSummaryResponse)(nil), // 6: paigram.platform.v1.GetCredentialSummaryResponse
-	(*PutCredentialRequest)(nil),         // 7: paigram.platform.v1.PutCredentialRequest
-	(*PutCredentialResponse)(nil),        // 8: paigram.platform.v1.PutCredentialResponse
-	(*RefreshCredentialRequest)(nil),     // 9: paigram.platform.v1.RefreshCredentialRequest
-	(*RefreshCredentialResponse)(nil),    // 10: paigram.platform.v1.RefreshCredentialResponse
-	(*DeleteCredentialRequest)(nil),      // 11: paigram.platform.v1.DeleteCredentialRequest
-	(*DeleteCredentialResponse)(nil),     // 12: paigram.platform.v1.DeleteCredentialResponse
-	(*structpb.Struct)(nil),              // 13: google.protobuf.Struct
-	(*timestamppb.Timestamp)(nil),        // 14: google.protobuf.Timestamp
+	(CredentialStatus)(0),                   // 0: paigram.platform.v1.CredentialStatus
+	(*DescribePlatformRequest)(nil),         // 1: paigram.platform.v1.DescribePlatformRequest
+	(*DescribePlatformResponse)(nil),        // 2: paigram.platform.v1.DescribePlatformResponse
+	(*DeviceSummary)(nil),                   // 3: paigram.platform.v1.DeviceSummary
+	(*ProfileSummary)(nil),                  // 4: paigram.platform.v1.ProfileSummary
+	(*GetCredentialSummaryRequest)(nil),     // 5: paigram.platform.v1.GetCredentialSummaryRequest
+	(*GetCredentialSummaryResponse)(nil),    // 6: paigram.platform.v1.GetCredentialSummaryResponse
+	(*PutCredentialRequest)(nil),            // 7: paigram.platform.v1.PutCredentialRequest
+	(*PutCredentialResponse)(nil),           // 8: paigram.platform.v1.PutCredentialResponse
+	(*RefreshCredentialRequest)(nil),        // 9: paigram.platform.v1.RefreshCredentialRequest
+	(*RefreshCredentialResponse)(nil),       // 10: paigram.platform.v1.RefreshCredentialResponse
+	(*DeleteCredentialRequest)(nil),         // 11: paigram.platform.v1.DeleteCredentialRequest
+	(*DeleteCredentialResponse)(nil),        // 12: paigram.platform.v1.DeleteCredentialResponse
+	(*InvalidateConsumerGrantRequest)(nil),  // 13: paigram.platform.v1.InvalidateConsumerGrantRequest
+	(*InvalidateConsumerGrantResponse)(nil), // 14: paigram.platform.v1.InvalidateConsumerGrantResponse
+	(*structpb.Struct)(nil),                 // 15: google.protobuf.Struct
+	(*timestamppb.Timestamp)(nil),           // 16: google.protobuf.Timestamp
 }
 var file_platform_v1_platform_proto_depIdxs = []int32{
-	13, // 0: paigram.platform.v1.DescribePlatformResponse.credential_schema:type_name -> google.protobuf.Struct
-	14, // 1: paigram.platform.v1.DeviceSummary.last_seen_at:type_name -> google.protobuf.Timestamp
+	15, // 0: paigram.platform.v1.DescribePlatformResponse.credential_schema:type_name -> google.protobuf.Struct
+	16, // 1: paigram.platform.v1.DeviceSummary.last_seen_at:type_name -> google.protobuf.Timestamp
 	0,  // 2: paigram.platform.v1.GetCredentialSummaryResponse.status:type_name -> paigram.platform.v1.CredentialStatus
-	14, // 3: paigram.platform.v1.GetCredentialSummaryResponse.last_validated_at:type_name -> google.protobuf.Timestamp
-	14, // 4: paigram.platform.v1.GetCredentialSummaryResponse.last_refreshed_at:type_name -> google.protobuf.Timestamp
+	16, // 3: paigram.platform.v1.GetCredentialSummaryResponse.last_validated_at:type_name -> google.protobuf.Timestamp
+	16, // 4: paigram.platform.v1.GetCredentialSummaryResponse.last_refreshed_at:type_name -> google.protobuf.Timestamp
 	3,  // 5: paigram.platform.v1.GetCredentialSummaryResponse.devices:type_name -> paigram.platform.v1.DeviceSummary
 	4,  // 6: paigram.platform.v1.GetCredentialSummaryResponse.profiles:type_name -> paigram.platform.v1.ProfileSummary
 	6,  // 7: paigram.platform.v1.PutCredentialResponse.summary:type_name -> paigram.platform.v1.GetCredentialSummaryResponse
 	0,  // 8: paigram.platform.v1.RefreshCredentialResponse.status:type_name -> paigram.platform.v1.CredentialStatus
-	14, // 9: paigram.platform.v1.RefreshCredentialResponse.refreshed_at:type_name -> google.protobuf.Timestamp
+	16, // 9: paigram.platform.v1.RefreshCredentialResponse.refreshed_at:type_name -> google.protobuf.Timestamp
 	1,  // 10: paigram.platform.v1.PlatformService.DescribePlatform:input_type -> paigram.platform.v1.DescribePlatformRequest
 	5,  // 11: paigram.platform.v1.PlatformService.GetCredentialSummary:input_type -> paigram.platform.v1.GetCredentialSummaryRequest
 	7,  // 12: paigram.platform.v1.PlatformService.PutCredential:input_type -> paigram.platform.v1.PutCredentialRequest
 	9,  // 13: paigram.platform.v1.PlatformService.RefreshCredential:input_type -> paigram.platform.v1.RefreshCredentialRequest
 	11, // 14: paigram.platform.v1.PlatformService.DeleteCredential:input_type -> paigram.platform.v1.DeleteCredentialRequest
-	2,  // 15: paigram.platform.v1.PlatformService.DescribePlatform:output_type -> paigram.platform.v1.DescribePlatformResponse
-	6,  // 16: paigram.platform.v1.PlatformService.GetCredentialSummary:output_type -> paigram.platform.v1.GetCredentialSummaryResponse
-	8,  // 17: paigram.platform.v1.PlatformService.PutCredential:output_type -> paigram.platform.v1.PutCredentialResponse
-	10, // 18: paigram.platform.v1.PlatformService.RefreshCredential:output_type -> paigram.platform.v1.RefreshCredentialResponse
-	12, // 19: paigram.platform.v1.PlatformService.DeleteCredential:output_type -> paigram.platform.v1.DeleteCredentialResponse
-	15, // [15:20] is the sub-list for method output_type
-	10, // [10:15] is the sub-list for method input_type
+	13, // 15: paigram.platform.v1.PlatformService.InvalidateConsumerGrant:input_type -> paigram.platform.v1.InvalidateConsumerGrantRequest
+	2,  // 16: paigram.platform.v1.PlatformService.DescribePlatform:output_type -> paigram.platform.v1.DescribePlatformResponse
+	6,  // 17: paigram.platform.v1.PlatformService.GetCredentialSummary:output_type -> paigram.platform.v1.GetCredentialSummaryResponse
+	8,  // 18: paigram.platform.v1.PlatformService.PutCredential:output_type -> paigram.platform.v1.PutCredentialResponse
+	10, // 19: paigram.platform.v1.PlatformService.RefreshCredential:output_type -> paigram.platform.v1.RefreshCredentialResponse
+	12, // 20: paigram.platform.v1.PlatformService.DeleteCredential:output_type -> paigram.platform.v1.DeleteCredentialResponse
+	14, // 21: paigram.platform.v1.PlatformService.InvalidateConsumerGrant:output_type -> paigram.platform.v1.InvalidateConsumerGrantResponse
+	16, // [16:22] is the sub-list for method output_type
+	10, // [10:16] is the sub-list for method input_type
 	10, // [10:10] is the sub-list for extension type_name
 	10, // [10:10] is the sub-list for extension extendee
 	0,  // [0:10] is the sub-list for field type_name
@@ -955,7 +1080,7 @@ func file_platform_v1_platform_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_platform_v1_platform_proto_rawDesc), len(file_platform_v1_platform_proto_rawDesc)),
 			NumEnums:      1,
-			NumMessages:   12,
+			NumMessages:   14,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

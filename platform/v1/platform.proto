@@ -13,6 +13,7 @@ service PlatformService {
   rpc PutCredential(PutCredentialRequest) returns (PutCredentialResponse);
   rpc RefreshCredential(RefreshCredentialRequest) returns (RefreshCredentialResponse);
   rpc DeleteCredential(DeleteCredentialRequest) returns (DeleteCredentialResponse);
+  rpc InvalidateConsumerGrant(InvalidateConsumerGrantRequest) returns (InvalidateConsumerGrantResponse);
 }
 
 message DescribePlatformRequest {}
@@ -93,5 +94,16 @@ message DeleteCredentialRequest {
 }
 
 message DeleteCredentialResponse {
+  bool success = 1;
+}
+
+message InvalidateConsumerGrantRequest {
+  string service_ticket = 1;
+  uint64 binding_id = 2;
+  string consumer = 3;
+  uint64 minimum_grant_version = 4;
+}
+
+message InvalidateConsumerGrantResponse {
   bool success = 1;
 }
