@@ -1,0 +1,81 @@
+syntax = "proto3";
+
+package paigram.bot.v1;
+
+option go_package = "github.com/PaiGramTeam/proto-contracts/bot/v1;botv1";
+
+// UserIdentity 标识一个平台用户的稳定身份。
+message UserIdentity {
+  // 平台原生用户 id（telegram 是 int64 字符串化、matrix 是 mxid 等）。
+  string platform_user_id = 1;
+  string display_name = 2;
+  // BCP-47 语言标签，可空。
+  string language_code = 3;
+}
+
+// MessageContext 是 game-service 处理一次入站消息所需的全部跨平台上下文。
+message MessageContext {
+  // 平台标识符（"telegram" / "matrix" / "discord" ...）。
+  string platform = 1;
+  UserIdentity user = 2;
+  // 平台原生 chat/room id 字符串化。
+  string chat_id = 3;
+  // 消息原文。
+  string text = 4;
+  // 解析后命令名（"sign" / "start" ...），无命令时为空。
+  string command = 5;
+  // 解析后参数列表，按空白拆分。
+  repeated string args = 6;
+
+  // 平台扩展槽。1:1:1 阶段仅 telegram 会被填充。
+  // next-tag: 101
+  oneof platform_extra {
+    TelegramExtra telegram = 100;
+  }
+}
+
+// TelegramExtra 携带不应污染通用 MessageContext 的 telegram-specific 字段。
+message TelegramExtra {
+  int64 message_id = 1;
+  bool is_group = 2;
+  int64 telegram_user_id = 3;
+  int64 telegram_chat_id = 4;
+}
+
+// BotResponse 是 game-service 单次回复的统一信封。
+message BotResponse {
+  // next-tag: 3
+  oneof body {
+    TextResponse text = 1;
+    PhotoResponse photo = 2;
+  }
+}
+
+message TextResponse {
+  string content = 1;
+  ParseMode parse_mode = 2;
+  bool disable_web_page_preview = 3;
+  // 字段 4..9 保留作未来扁平字段；10+ 留给复合选项。
+  ReplyOptions reply = 10;
+}
+
+message PhotoResponse {
+  // 必填：minio URL 或 Telegram file_id。永不携带 bytes（spec §3 决策）。
+  string photo_url = 1;
+  string caption = 2;
+  ParseMode caption_parse_mode = 3;
+  // 字段 4..9 保留作未来扁平字段；10+ 留给复合选项。
+  ReplyOptions reply = 10;
+}
+
+enum ParseMode {
+  PARSE_MODE_UNSPECIFIED = 0;
+  PARSE_MODE_MARKDOWN_V2 = 1;
+  PARSE_MODE_HTML = 2;
+  PARSE_MODE_PLAIN = 3;
+}
+
+message ReplyOptions {
+  // 0 表示不 reply。
+  int64 reply_to_message_id = 1;
+}

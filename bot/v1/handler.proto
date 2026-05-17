@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package paigram.bot.v1;
+
+option go_package = "github.com/PaiGramTeam/proto-contracts/bot/v1;botv1";
+
+// HandlerDeclaration 是 game-service 在 DescribeService 中暴露的单个命令元数据。
+message HandlerDeclaration {
+  // 命令名，去掉斜杠前缀（"sign"、"help"）。
+  string command = 1;
+  // 人类可读描述，作为 /help 一行使用。
+  string description = 2;
+  HandlerVisibility visibility = 3;
+}
+
+enum HandlerVisibility {
+  HANDLER_VISIBILITY_UNSPECIFIED = 0;
+  // 进 /help 列表，公开可见。
+  HANDLER_VISIBILITY_PUBLIC = 1;
+  // 不进 /help 但可调用。
+  HANDLER_VISIBILITY_HIDDEN = 2;
+}

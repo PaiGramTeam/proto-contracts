@@ -1,0 +1,52 @@
+syntax = "proto3";
+
+package paigram.template.v1;
+
+option go_package = "github.com/PaiGramTeam/proto-contracts/template/v1;templatev1";
+
+// TemplateService 渲染 HTML 模板为图片并上传至 minio，返回 URL。
+service TemplateService {
+  // RenderAndUpload 渲染单个模板，返回可被 game-service 直接放入 PhotoResponse.photo_url 的 URL。
+  rpc RenderAndUpload(RenderAndUploadRequest) returns (RenderAndUploadResponse);
+  // DescribeService 列出当前已注册的模板名，用于自检与诊断。
+  rpc DescribeService(DescribeServiceRequest) returns (DescribeServiceResponse);
+}
+
+message RenderAndUploadRequest {
+  // 模板名（不含扩展名），形如 "genshin/sign_result"。
+  string template_name = 1;
+  // JSON 序列化后的模板数据；bytes 形式是为了避免 dynamic message 复杂度（**非**媒体 bytes）。
+  bytes data_json = 2;
+  RenderOptions options = 3;
+}
+
+// RenderOptions 承载渲染参数。
+// 注意：当前字段语义为 playwright-specific；future cross-renderer 实现需要扩展此 message
+// 或新增一个 renderer-options oneof。
+message RenderOptions {
+  int32 viewport_width = 1;
+  // 0 表示自适应内容高度。
+  int32 viewport_height = 2;
+  // 默认 2.0。
+  float device_scale_factor = 3;
+  // "png" 或 "jpeg"，默认 "png"。
+  string format = 4;
+}
+
+message RenderAndUploadResponse {
+  // minio public URL。
+  string url = 1;
+  // bucket 内对象 key，用于后续清理或 audit。
+  string object_key = 2;
+  int64 size_bytes = 3;
+  // 0 表示无过期。
+  int64 expires_at_unix = 4;
+}
+
+message DescribeServiceRequest {}
+
+message DescribeServiceResponse {
+  string service_id = 1;
+  string version = 2;
+  repeated string available_templates = 3;
+}

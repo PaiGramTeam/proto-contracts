@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+package paigram.bot.v1;
+
+import "bot/v1/messages.proto";
+import "bot/v1/handler.proto";
+
+option go_package = "github.com/PaiGramTeam/proto-contracts/bot/v1;botv1";
+
+// BotService 是 telegram-service 调用 game-service 的统一接口。
+// 业务异常永远不走 gRPC 错误通道——framework 将其转为 fallback TextResponse。
+service BotService {
+  // Dispatch 处理一次入站消息，返回零或多条回复。
+  rpc Dispatch(DispatchRequest) returns (DispatchResponse);
+  // DescribeService 用于路由注册期与 /help 元数据查询。
+  rpc DescribeService(DescribeServiceRequest) returns (DescribeServiceResponse);
+}
+
+message DispatchRequest {
+  MessageContext context = 1;
+}
+
+message DispatchResponse {
+  repeated BotResponse responses = 1;
+}
+
+message DescribeServiceRequest {}
+
+message DescribeServiceResponse {
+  // 服务的稳定标识（如 "paigram-genshin"），用于路由表与日志。
+  string service_id = 1;
+  // 实现版本，建议 SemVer。
+  string version = 2;
+  repeated HandlerDeclaration handlers = 3;
+}
